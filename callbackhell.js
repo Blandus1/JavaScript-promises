@@ -18,10 +18,27 @@ const legacyAPI = {
 };
 
 legacyAPI.login('Blandine',(error,data)=>{
+      if (error) {
+        console.log("login error", error.message)
+        return
+    }
     legacyAPI.getMovies(data.userId,(error,movieArr)=>{
+          if (error) {
+        console.log("getMovies error",error.message)
+        return
+    }
         legacyAPI.getShowtimes(movieArr[0],(error,timeArr)=>{
+              if (error) {
+        console.log("showTimes error", error.message)
+        return
+    }
             legacyAPI.bookTicket(timeArr[0],(error,seat)=>{
+                  if (error) {
+        console.log("booking error", error.message)
+        return
+    }
                 console.log(`Success! Booked seat ${seat.seat} at ${timeArr[0]}.`)
+                
             })
         })
     })
