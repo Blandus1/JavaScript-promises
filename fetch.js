@@ -53,7 +53,7 @@ const commentsUrl="https://jsonplaceholder.typicode.com/comments"
 try{
   const userres= await fetch(userUrl)
   if(!userres.ok){
-    throw new Error(`Failed to fetch:${userres.status}`)
+    throw new Error(`Failed to fetch users:${userres.status}`)
   }
   const user= await userres.json()
   
@@ -65,7 +65,7 @@ try{
   
   const postres= await fetch(postUrl)
   if(!postres.ok){
-    throw new Error(`Failed to fetch: ${postres.status}`)
+    throw new Error(`Failed to fetch posts: ${postres.status}`)
   }
   const posts= await postres.json()
   
@@ -95,3 +95,20 @@ return {posts: topLimitPosts}
   }
 }
 getTopPosts(5).then(result => console.log(result));
+
+/*About fetch: Challenge 3
+A complete dashboard that shows everything about all users: their posts and engagement.
+*The Goal
+Create a report showing:
+-All users
+-How many posts each user wrote
+-How many comments each user received (on all their posts)
+-The average comments per post for each user
+-Find the most active user (most posts)
+-Find the most popular user (most comments received)
+*/
+
+
+
+
+
