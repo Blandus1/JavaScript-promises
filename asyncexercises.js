@@ -43,3 +43,47 @@ console.log('All scripts loaded!');
 }
 
 loadScript('1.js',loadScript1);
+
+
+
+//Turning callback function to promise-based function
+//callback based function
+function fetchData(callback) {
+    setTimeout(() => {
+      const data = "Data fetched successfully!";
+      callback(null, data);
+    }, 1000);
+  }
+  
+  fetchData((error, data) => {
+    if (error) {
+      console.error("Error:", error);
+    } else {
+      console.log(data);
+    }
+  });
+
+  //Promise-based function
+
+function fetchData(){
+  return new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+const data= "Data fetched successfully!";
+      
+      if(data){
+        resolve(data)
+      }else{
+        reject(new Error("Failed to fetch data"))
+      }
+      
+    },1000);
+  })
+}
+
+fetchData().then(data=>console.log(data))
+        .catch(error=>console.log(error))// we add this two parts to call/handle the promise otherwise it can not be logged
+
+
+
+
+
