@@ -84,6 +84,31 @@ fetchData().then(data=>console.log(data))
         .catch(error=>console.log(error))// we add this two parts to call/handle the promise otherwise it can not be logged
 
 
+//myFetch fxn which uses XMLHttpRequest to return a promise
+
+function myFetch(url, method="GET"){
+ return new Promise((resolve,reject)=>{
+   const xhr= new XMLHttpRequest()
+   xhr.open(method,url,true)//used to specify the request's method and url, boolean true shows that it'll be async
+   
+
+  xhr.onload=function(){
+    if(xhr.status >= 200 & xhr.status < 400){//this condition handles server errors and client errors
+      resolve(JSON.parse(xhr.responseText))//xhr.responseText returns the response data as text and JSON parses it 
+    }else{
+      reject(new Error(`Request failed with status ${xhr.status}: ${xhr.statusText}`))
+    }
+  }
+  xhr.onerror= function(){
+    reject(new Error("Network Error"))
+  }
+  xhr.send()
+})
+}
+myFetch('https://jsonplaceholder.typicode.com/users')
+.then(data => console.log(data))
+.catch(error => console.log('Error:', error))
+
 
 
 
