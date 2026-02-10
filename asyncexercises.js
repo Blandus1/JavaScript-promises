@@ -99,15 +99,15 @@ function myFetch(url, method="GET"){
       reject(new Error(`Request failed with status ${xhr.status}: ${xhr.statusText}`))
     }
   }
-  xhr.onerror= function(){
+  xhr.onerror= function(){//onerror only checks network level failures
     reject(new Error("Network Error"))
   }
-  xhr.send()
+  xhr.send()//initiates the request -> no argument or null when the method is 'GET' since GET do not have body
 })
 }
 myFetch('https://jsonplaceholder.typicode.com/users')
 .then(data => console.log(data))
-.catch(error => console.log('Error:', error))
+.catch(error => console.log('Error:', error))//check all promise errors (like with status) even those in onload.
 
 
 
