@@ -70,3 +70,50 @@ let [usersRes, todosRes, postsRes]= await Promise.all([users.json(), todos.json(
 }
 fetchUserActivityDashboard().then(res=>console.log(res))
                             .catch(error=>console.log(error))
+
+
+/*Create a function called getAvailablePosts that:// 2nd challenge (STATUS: NOT DONE YET)
+
+Fetches posts from all three sources concurrently:
+Source 1: https://dummyjson.com/posts
+Source 2: https://jsonplaceholder.typicode.com/posts
+Source 3: https://this-may-not-exist.com/posts (This will fail!)
+Returns successful results even if some sources fail
+Don't let one failed endpoint crash the entire application
+Aggregate all successful responses into a single array
+Provides metadata about which sources succeeded/failed
+
+---
+*/
+
+
+
+async function getAvailablePosts(){
+  try{
+    const source1= " https://dummyjson.com/posts"
+    const source2= "https://jsonplaceholder.typicode.com/posts"
+    const source3= "https://this-may-not-exist.com/posts"
+    
+    const allSources= await Promise.allSettled([fetch(source1), fetch(source2), fetch(source3)])
+
+
+const response= await Promise.all(
+  allSources.map(all=>{
+  if(all.status==="fulfilled"){
+    return all.value.json()
+  }else{
+    return `Error`
+  }
+}))
+
+// let [src1, src2, src3]= response
+return response
+
+  }catch(error){
+    console.log("Error detected:",error)
+  }
+
+}
+
+getAvailablePosts().then(res=>console.log(res))
+.catch(err => console.log(err))

@@ -83,6 +83,31 @@ const data= "Data fetched successfully!";
 fetchData().then(data=>console.log(data))
         .catch(error=>console.log(error))// we add this two parts to call/handle the promise otherwise it can not be logged
 
+        
+//async approach 
+async function fetchData(){
+  try{
+    const results= await new Promise((resolve,reject)=>{
+         setTimeout(()=>{
+      const data ="data fetched successfully"
+     if(data){
+       resolve(data)
+     }else{
+       reject(new Error("failed to fetch data"))
+     }
+
+    },100)
+    })
+ return results;
+  }catch(error){
+    console.log(error)
+    throw error
+  }
+
+}
+
+fetchData().then((res)=>console.log(res))
+.catch(error=>console.log(error))
 
 //myFetch fxn which uses XMLHttpRequest to return a promise
 

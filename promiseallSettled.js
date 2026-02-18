@@ -67,3 +67,13 @@ let[userRes,postRes,notificationRes]= data
 
   }
   fetcher().then(res=>console.log(res))
+
+
+
+
+
+
+
+
+
+
